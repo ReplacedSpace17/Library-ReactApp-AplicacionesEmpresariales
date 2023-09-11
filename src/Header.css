@@ -1,0 +1,33 @@
+.header {
+    background-color: transparent; /* Color de fondo del menú */
+    color: rgb(19, 19, 19); /* Color del texto en el menú */
+    padding: 10px; /* Espaciado interior del menú */
+    text-align: right; /* Alinea el contenido a la derecha */
+  
+    /* Ajusta otros estilos según tus preferencias */
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu li {
+    display: inline;
+    margin-right: 20px; /* Espaciado entre elementos del menú */
+  }
+  
+  .menu a {
+    text-decoration: none;
+    color: rgb(27, 27, 27); /* Color del texto del enlace */
+    border-radius: 5px; /* Radio del borde */
+    padding: 5px 10px; /* Espaciado interior para el enlace */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave de color de fondo y texto */
+  }
+  
+  .menu a:hover {
+    background-color: #0f053b; /* Cambia el color de fondo al hacer hover */
+    color: #fff; /* Cambia el color del texto al hacer hover */
+  }
+  
