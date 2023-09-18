@@ -9,11 +9,12 @@ import Pacientes_page from './View/Pacientes_page';
 import Seguimiento_page from './View/Seguimiento';
 
 import Login from './View/Login/Login';
+import Home from './View/Home/Home';
 
 function App() {
     return (
         <div className="App">
-            <Login/>
+            <Home/>
         </div>
     );
 }

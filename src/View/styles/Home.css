@@ -1,0 +1,8 @@
+.ContentHome{
+    display: flex;
+    flex-direction: column;
+}
+.fondo{
+    width: 100vw;
+    height: auto;
+}
