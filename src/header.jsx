@@ -3,14 +3,18 @@ import './Header.css'; // Importa un archivo CSS para estilizar el menú
 
 function Header() {
   return (
-    <div className="header">
-      <ul className="menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Seguimiento</a></li>
-        <li><a href="#">Pacientes</a></li>
-        <li><a href="#">Actividades</a></li>
+    <header className="header">
+    <div className="logo">Logo</div>
+    <nav className="nav">
+      <ul>
+        <li className="active">Home</li>
+        <li>Pacientes</li>
+        <li>Expedientes</li>
+        <li>Estadísticas</li>
+        <li>Actividades</li>
       </ul>
-    </div>
+    </nav>
+  </header>
   );
 }
 
