@@ -10,11 +10,14 @@ import Seguimiento_page from './View/Seguimiento';
 
 import Login from './View/Login/Login';
 import Home from './View/Home/Home';
+import PacientesMenu from './View/Pacientes/PacientesMenu';
+import AddPacientes from './View/Pacientes/pacientesAdd';
 
 function App() {
     return (
         <div className="App">
-            <Home/>
+
+            <AddPacientes/>
         </div>
     );
 }
