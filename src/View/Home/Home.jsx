@@ -10,7 +10,7 @@ function Home() {
     return (
         <div className="ContentHome">
             <Header/>
-          <img src={fondo} className='fondo'></img>
+          
         </div>
     );
 }
