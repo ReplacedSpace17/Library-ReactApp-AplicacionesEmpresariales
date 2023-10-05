@@ -8,7 +8,7 @@ import ErrorPage from "./error-page";
 
 import Login from "./View/Login/Login";
 import Home from './View/Home/Home';
-
+import PacientesMenu from './View/Pacientes/PacientesMenu';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/Home",
     element:  <Home/>,
+  },
+  {
+    path: "/Pacientes",
+    element:  <PacientesMenu/>,
   },
 
 

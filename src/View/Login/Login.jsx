@@ -1,113 +1,130 @@
+import { useEffect, useState } from "react";
 import '../styles/Login.css';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import imageLogin from '../../assets/imgLogin.png';
-import Button from '@mui/material/Button';
-import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+//import axios from 'axios';
+import { SHA256 } from 'crypto-js';
+import Swal from 'sweetalert2';
+//import backendUrl from '../../serverConfig';
+//imports de login firebase
+import { Alert, Box, Button, Container, Link, TextField, Typography } from "@mui/material";
 
+import { useNavigate } from "react-router-dom";
+import { useSpring, animated } from 'react-spring';
+
+
+
+function errorPassword() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Autenticación fallida',
+    text: 'Las credenciales proporcionadas no coinciden para su acceso.',
+    confirmButtonColor: '#4CAF50',
+    confirmButtonText: 'Reintentar'
+  })
+
+}
+
+//---------------------------------------------------------------------function principal
 function Login() {
 
-    const Navegar = (ruta) => {
-        useNavigate('/' + ruta);
-    };
+  const [showPassword, setShowPassword] = useState(false);
+  const password = "";
+  function handleTogglePassword() {
+    setShowPassword(!showPassword);
+  }
 
-    const [showPassword, setShowPassword] = React.useState(false);
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+  //login
+  const navigate = useNavigate();
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
+  const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
+  const [password2, setPassword] = useState("");
+  const [pass, setPasswordVisible] = useState("");
 
 
 
-    const handleLogin = () => {
-        console.log("Correo electrónico:", email);
-        console.log("Contraseña:", password);
-        // Aquí puedes agregar la lógica de autenticación real
-        if (email == "" && password == "") {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No dejes vacío los campos de texto!',
+  const [isVisible, setIsVisible] = useState(false);
 
-            });
-        }
-        else {
-            //navergar
-            Navegar("Home");
-        }
+  const fade = useSpring({ opacity: 1, from: { opacity: 0 } });
+  const zoom = useSpring({ transform: 'scale(1)', from: { transform: 'scale(0.5)' } });
 
-    };
+  const zoomWithDelay = useSpring({
+    transform: 'scale(1)',
+    from: { transform: 'scale(0.5)' },
+    config: { delay: 2000 } // Agregar un retraso de 1000ms (1 segundo)
+  });
 
-    return (
-        <body>
-            <div className='imgContainer'>
-                <img id='imageLogin' src={imageLogin} alt="Imagen de inicio de sesión" />
-            </div>
-            <div className='formContainer'>
-                <div className='ContentBox'>
-                    <h1>Iniciar sesión</h1>
-                    <Box
-                        component="form"
-                        sx={{
-                            '& > :not(style)': { m: 1, width: '40ch' },
-                        }}
-                        noValidate
-                        autoComplete="off"
-                    >
-                        <TextField
-                            id="outlined-basic"
-                            label="Correo electrónico"
-                            variant="outlined"
-                            type='email'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                        </FormControl>
-                        <Button variant="contained" onClick={handleLogin}>
-                            Iniciar sesión
-                        </Button>
-                    </Box>
-                </div>
-            </div>
-        </body>
-    );
+  const slide = useSpring({
+    from: { transform: 'translateX(100%)' },
+    to: { transform: 'translateX(0)' },
+  });
+
+  const fadeInUp = useSpring({
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+    from: { opacity: 0, transform: 'translateY(20px)' }
+  });
+
+
+  const [isAnimating, setIsAnimating] = useState(false);
+
+
+  // redirect the user if he's already logged in
+  useEffect(() => {
+  
+
+  }, [navigate]);
+
+
+
+
+  //ir al home
+  //navigate("/loader-Home");
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    navigate("/Home");
+  };
+
+
+  function handleUserAdmin() {
+    navigate("/LoginSU");
+  }
+
+  //-----------------------------------------------------------------return
+  return (
+    <div id='body'>
+
+      <div id='contenedor_img'>
+        <div id='contentHeader'><embed type="image/svg+xml" alt="SVG" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/OANR1KxWG0GiAeq0TWSrnQ.svg" id='Logo' />
+        </div>
+        <animated.img style={fade} id="image" src={"#"} preload="true" />
+
+      </div>
+
+
+      <animated.div style={slide} id="contenedor_form">
+        <div id='contenedor_Menu_top'>
+          
+        </div>
+        <img src={"#"} id='IconoLoginForm' preload="true"/>
+
+        <animated.h1 style={fade} id="TitleLogin">Iniciar Sesión</animated.h1>
+
+        <p>¡Inicia sesión para acceder a todas las funciones!</p>
+        <form onSubmit={onSubmit}>
+          <input id="inpt_Login" type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="usuario" placeholder='Correo electrónico' />
+          <input id="inpt_Login" type={showPassword ? 'text' : 'password'} value={password2} onChange={(e) => setPassword(e.target.value)}  name="password" placeholder='Contraseña'  />
+          <button type="button" onClick={handleTogglePassword} className='btnShow'>
+                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} className="ico_show" /> {showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+              </button>
+          <button className='buttonLogin'>Iniciar Sesión</button>
+        </form>
+      </animated.div>
+    </div >
+  );
 }
 
 export default Login;
