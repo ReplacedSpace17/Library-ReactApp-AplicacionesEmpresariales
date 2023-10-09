@@ -46,9 +46,7 @@ input{
     #Logo{
      fill: black;
     }
-    #IconoLoginForm{
-      width: 100px;
-    }
+  
     
     #contenedor_form {
       width: 100vw;
@@ -95,15 +93,15 @@ input{
     }
     
     #IconoLoginForm {
-      width: 100px;
+      width: 150px;
       margin: 20px;
       margin-bottom: 40px;
     }
     
     #TitleLogin {
       font-family: 'Inter', sans-serif;
-      color: #333333;
-      font-weight: 300;
+      color: #0079C7;
+      /*font-weight: 300;
       /* Peso de la fuente "Light" */
     }
     
@@ -140,7 +138,7 @@ input{
     .buttonLogin {
       width: 56%;
       color: white;
-      background-color: #222;
+      background-color: #0079C7;
       font-weight: 500;
       border-radius: 0.5rem;
       font-size: 1rem;
@@ -158,7 +156,7 @@ input{
     }
     
     .buttonLogin:hover {
-      background-color: #5f5f5f;
+      background-color: #2ba1f0;
       color: rgb(0, 0, 0);
     }
     
@@ -176,7 +174,11 @@ input{
         height: 100vh;
         display: flex;
         flex-direction: row;
-        background: linear-gradient(135deg, #172527 0%, #418d99 100%);
+        background-image: url('../../assets/image\ 2.png');
+        background-repeat: no-repeat;
+        background-size:60%; /* Hace que la imagen cubra todo el contenedor */
+        background-position: center; /* Centra la imagen en el contenedor */
+        background-repeat: no-repeat; /* Evita que la imagen se repita */
       }
       
       #contenedor_img {
@@ -247,18 +249,8 @@ input{
         scale: 0.9;
       }
       
-      #IconoLoginForm {
-        width: 100px;
-        margin: 10px;
-        margin-bottom: 20px;
-      }
-      
-      #TitleLogin {
-        font-family: 'Inter', sans-serif;
-        color: #333333;
-        font-weight: 300;
-        /* Peso de la fuente "Light" */
-      }
+ 
+
       
       #inpt_Login {
         width: 50%;
@@ -289,31 +281,7 @@ input{
       
       }
       
-      
-      .buttonLogin {
-        width: 56%;
-        color: white;
-        background-color: #222;
-        font-weight: 500;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        line-height: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        padding-top: 0.7rem;
-        padding-bottom: 0.7rem;
-        text-align: center;
-        margin: 10px;
-        margin-top: 30px;
-        border: none;
-        cursor: pointer;
-        transition: all 0.3s;
-      }
-      
-      .buttonLogin:hover {
-        background-color: #33656d;
-        color: rgb(0, 0, 0);
-      }
+ 
       
       .buttonLogin:active {
         scale: 0.95;

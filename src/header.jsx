@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css'; // Importa un archivo CSS para estilizar el menú
 import { useNavigate } from "react-router-dom";
 
+import logo from './assets/CognitiveX-logo.png'
 function Header() {
   const navigate = useNavigate(); // Get the navigation function
 
@@ -11,11 +12,14 @@ function Header() {
   
   return (
     <header className="header">
-      <div className="logo">Logo</div>
+      <div className="logo">
+      <img src={logo}></img>
+      </div>
       <nav className="nav">
         <ul>
-          <li className="active">Home</li>
+          <li >Home</li>
           <li onClick={goToPacientes}>Pacientes</li>
+          <li>Personal</li>
           <li>Expedientes</li>
           <li>Estadísticas</li>
           <li>Actividades</li>

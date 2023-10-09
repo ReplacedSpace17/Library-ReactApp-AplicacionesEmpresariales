@@ -14,7 +14,7 @@ import { Alert, Box, Button, Container, Link, TextField, Typography } from "@mui
 import { useNavigate } from "react-router-dom";
 import { useSpring, animated } from 'react-spring';
 
-
+import logo from '../../assets/CognitiveX.png';
 
 function errorPassword() {
   Swal.fire({
@@ -85,6 +85,9 @@ function Login() {
   //navigate("/loader-Home");
   const onSubmit = async (event) => {
     event.preventDefault();
+
+    //validar con el backend
+    
     navigate("/Home");
   };
 
@@ -98,9 +101,9 @@ function Login() {
     <div id='body'>
 
       <div id='contenedor_img'>
-        <div id='contentHeader'><embed type="image/svg+xml" alt="SVG" src="https://cdn-us.icons8.com/docs/mgJd1Ewo7U2qOmtDFpJYhQ/OANR1KxWG0GiAeq0TWSrnQ.svg" id='Logo' />
+        <div id='contentHeader'>
         </div>
-        <animated.img style={fade} id="image" src={"#"} preload="true" />
+      
 
       </div>
 
@@ -109,11 +112,11 @@ function Login() {
         <div id='contenedor_Menu_top'>
           
         </div>
-        <img src={"#"} id='IconoLoginForm' preload="true"/>
+        <img src={logo} id='IconoLoginForm' preload="true"/>
 
-        <animated.h1 style={fade} id="TitleLogin">Iniciar Sesión</animated.h1>
+        <animated.h1 style={fade} id="TitleLogin">INICIAR SESIÓN</animated.h1>
 
-        <p>¡Inicia sesión para acceder a todas las funciones!</p>
+        <p>Bienvenido, por favor identifícate</p>
         <form onSubmit={onSubmit}>
           <input id="inpt_Login" type="email" value={email} onChange={(e) => setEmail(e.target.value)} name="usuario" placeholder='Correo electrónico' />
           <input id="inpt_Login" type={showPassword ? 'text' : 'password'} value={password2} onChange={(e) => setPassword(e.target.value)}  name="password" placeholder='Contraseña'  />

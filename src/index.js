@@ -9,6 +9,11 @@ import ErrorPage from "./error-page";
 import Login from "./View/Login/Login";
 import Home from './View/Home/Home';
 import PacientesMenu from './View/Pacientes/PacientesMenu';
+import PacientesOptions from './View/Pacientes/PacientesOptions';
+import PacientesAdd1 from './View/Pacientes/PacientesAdd1';
+import PacientesAdd2 from './View/Pacientes/PacientesAdd2';
+import PacientesAdd3 from './View/Pacientes/PacientesAdd3';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +31,22 @@ const router = createBrowserRouter([
   {
     path: "/Pacientes",
     element:  <PacientesMenu/>,
+  },
+  {
+    path: "/PacientesOptions",
+    element:  <PacientesOptions/>,
+  },
+  {
+    path: "/FormPacientes1",
+    element:  <PacientesAdd1/>,
+  },
+  {
+    path: "/FormPacientes2",
+    element:  <PacientesAdd2/>,
+  },
+  {
+    path: "/FormPacientes3",
+    element:  <PacientesAdd3/>,
   },
 
 
