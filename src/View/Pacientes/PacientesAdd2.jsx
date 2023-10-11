@@ -54,7 +54,7 @@ function PacientesAdd2() {
                         <input className='inputForm' type='text' placeholder='Estado Civil'/>
 
                         <input type='button' className='ButtonSecondary' onClick={Back} value="Regresar"/>
-                        <button className='ButtonPrimary' onClick={a}>Siguiente</button>
+                        <button className='ButtonPrimary' onClick={NavSiguiente}>Siguiente</button>
                         
                     </form>
                    
