@@ -1,6 +1,6 @@
 
 // App.js
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/Login.css';
 
 import image from '../img/fondoPaciente.png';
@@ -34,6 +34,19 @@ function PacientesAdd2() {
       }
 
 
+             // Estado para almacenar los datos del paciente
+    const [pacienteData2, setPacienteData] = useState({
+        nombre: '',
+        apellidoPaterno: '',
+        apellidoMaterno: '',
+        telefono: '',
+        sexo: 'Masculino', // Valor predeterminado
+        direccion: '',
+        fecha: '',
+        ingreso: '',
+    });
+
+
     return (
         <html>
             <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'></link>
@@ -53,7 +66,7 @@ function PacientesAdd2() {
 
                         <input className='inputForm' type='text' placeholder='Estado Civil'/>
 
-                        <input type='button' className='ButtonSecondary' onClick={Back} value="Regresar"/>
+                        <input type='button' className='ButtonSecondary' onClick={a} value="Regresar"/>
                         <button className='ButtonPrimary' onClick={NavSiguiente}>Siguiente</button>
                         
                     </form>

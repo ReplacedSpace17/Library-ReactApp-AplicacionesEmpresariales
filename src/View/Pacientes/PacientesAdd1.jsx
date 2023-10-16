@@ -1,6 +1,6 @@
 
 // App.js
-import React, { useState } from 'react';
+
 import '../styles/Login.css';
 
 import image from '../img/fondoPaciente.png';
@@ -10,8 +10,11 @@ import './stylePacientes.css';
 import addIcon from '../../assets/icons/addIcon.png';
 import deleteIcon from '../../assets/icons/deleteIcon.png';
 import editIcon from '../../assets/icons/editIcon.png';
-
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import backendUrl from '../../configServer';
+
 function PacientesAdd1() {
 
     const navigate = useNavigate(); // Get the navigation function
@@ -25,6 +28,8 @@ function PacientesAdd1() {
 
        // Estado para almacenar los datos del paciente
     const [pacienteData, setPacienteData] = useState({
+        UID: "U00222",
+        PID: "P00022",
         nombre: '',
         apellidoPaterno: '',
         apellidoMaterno: '',
@@ -41,6 +46,35 @@ function PacientesAdd1() {
     }
 
 
+    const handleSubmit = (e) => {
+    e.preventDefault();
+
+
+
+    // Ahora puedes realizar operaciones de guardado en la base de datos o cualquier otra acción
+    // con la instancia 'paciente', por ejemplo, enviándola a tu servidor.
+
+    // Ejemplo de cómo enviar la instancia al servidor usando axios
+    axios.post(backendUrl+'/api/paciente/add', pacienteData)
+      .then(response => {
+        // Realizar acciones después de guardar exitosamente (por ejemplo, redireccionar).
+        if (response.status === 200) {
+            // La solicitud se completó con éxito (código de estado 200 OK).
+            // Realiza acciones después de guardar exitosamente, por ejemplo, redirigir.
+            console.log('Guardado exitosamente');
+            // Ejemplo de redirección a una página de éxito.
+            // navigate('/exito');
+            navigate('/FormPacientes2', { state: { pacienteData } });
+          } else {
+            // La solicitud no se completó con éxito, puedes manejar errores aquí.
+            console.log('Error al guardar');
+          }
+      })
+      .catch(error => {
+        console.error('Error al guardar paciente:', error);
+        // Realizar acciones en caso de error.
+      });
+  };
     return (
         <html>
             <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'></link>
@@ -52,7 +86,7 @@ function PacientesAdd1() {
                 <h3 className='secondTittle'>Completa la información</h3>
                 <p>No dejes ningún campo en blanco</p>
                 <div className='containerForm'>
-                <form className='formPacientes'>
+                <form className='formPacientes' onSubmit={handleSubmit}>
                     <input
                         className='inputForm'
                         type='text'
@@ -115,7 +149,7 @@ function PacientesAdd1() {
                         />
                         <input
                             className='inputIngreso'
-                            type='text'
+                            type='date'
                             name='ingreso'
                             placeholder='Ingreso'
                             value={pacienteData.ingreso}
@@ -128,7 +162,7 @@ function PacientesAdd1() {
                         onClick={Back}
                         value="Regresar"
                     />
-                    <button className='ButtonPrimary' onClick={NavSiguiente}>Siguiente</button>
+                    <button className='ButtonPrimary' >Siguiente</button>
                 </form>
             </div>
             </body>

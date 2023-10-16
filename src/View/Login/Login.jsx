@@ -15,13 +15,30 @@ import backendUrl from "../../configServer";
 function errorPassword() {
   Swal.fire({
     icon: 'error',
-    title: 'Autenticación fallida',
+    title: 'Password erróneo',
     text: 'Las credenciales proporcionadas no coinciden para su acceso.',
     confirmButtonColor: '#4CAF50',
     confirmButtonText: 'Reintentar'
   })
 }
-
+function errorUser() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Usuario no existe',
+    text: 'No hay registros de este usuario',
+    confirmButtonColor: '#4CAF50',
+    confirmButtonText: 'Reintentar'
+  })
+}
+function errorServer() {
+  Swal.fire({
+    icon: 'error',
+    title: 'Servidor no conectado',
+    text: 'El backend no está en línea',
+    confirmButtonColor: '#4CAF50',
+    confirmButtonText: 'Reintentar'
+  })
+}
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -32,28 +49,46 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // Crear una instancia de Axios
+const axiosInstance = axios.create({
+  baseURL: backendUrl, // Reemplaza 'backendUrl' con la URL de tu servidor
+});
 
-    try {
-      const response = await axios.post(`${backendUrl}/api/Login`, {
-        Email: email,
-        Password: password,
-      });
-
-      alert(response.status);
-      if (response.status === 200) {
-        navigate('/Home');
-      }
-      else{
-        alert("sd");
-        errorPassword();
-        console.error('Error en la autenticación');
-      }
-    } catch (error) {
-      console.error('Error en la solicitud de autenticación:', error);
+// Interceptor de respuesta para manejar errores
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response.status === 404) {
+      errorUser();
+    } else if (error.response.status === 401) {
+      errorPassword();
     }
-  };
+    else if (error.response.status === 500) {
+      alert('Error de servidor');
+    }
+    return Promise.reject(error);
+  }
+);
+
+  // Función para realizar la solicitud de autenticación
+const handleSubmit = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await axiosInstance.post('/api/Login', {
+      Email: email,
+      Password: password,
+    });
+
+    if (response.status === 200) {
+      // El servidor ha respondido con un estado HTTP 200 (OK).
+      // Puedes hacer algo con la respuesta exitosa aquí.
+      navigate('/Home');
+    }
+  } catch (error) {
+    console.error('Error en la solicitud de autenticación:', error);
+  }
+};
 
   return (
     <div id='body'>
