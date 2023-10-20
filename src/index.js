@@ -13,6 +13,7 @@ import PacientesOptions from './View/Pacientes/PacientesOptions';
 import PacientesAdd1 from './View/Pacientes/PacientesAdd1';
 import PacientesAdd2 from './View/Pacientes/PacientesAdd2';
 import PacientesAdd3 from './View/Pacientes/PacientesAdd3';
+import PersonalAdd from './View/Personal/addPersonal';
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,12 @@ const router = createBrowserRouter([
     element:  <PacientesAdd3/>,
   },
 
+  {
+    path: "/PersonalAdd",
+    element:  <PersonalAdd/>,
+  },
 
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

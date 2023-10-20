@@ -2,18 +2,23 @@
 import React from 'react';
 import './styles/Pacientes.css';
 import Header from '../header';
+import { useLocation } from 'react-router-dom';
 
 function Home_page() {
+    const location = useLocation();
+  const { uid } = location.state;
+
     return (
         <div className="App">
             <div className='imgBackground'>
                 <Header />
-                <h1>Plataforma de desarrollo cognitivo</h1>
+               
             </div>
 
            
             <div className='back'>
                 {/* Contenido del div back */}
+                <h1>hola {uid}</h1>
             </div>
         </div>
     );

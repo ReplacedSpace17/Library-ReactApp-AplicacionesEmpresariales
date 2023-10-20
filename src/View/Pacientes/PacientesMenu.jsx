@@ -10,19 +10,22 @@ import './stylePacientes.css';
 import addIcon from '../../assets/icons/addIcon.png';
 import deleteIcon from '../../assets/icons/deleteIcon.png';
 import editIcon from '../../assets/icons/editIcon.png';
+import { useLocation } from 'react-router-dom';
 
 import { useNavigate } from "react-router-dom";
 function PacientesMenu() {
 
-    
+    const location = useLocation();
+    const { uid } = location.state;
+
     const navigate = useNavigate(); // Get the navigation function
 
     const NavTablePacientes = () => {
-        navigate('/PacientesOptions');
+        navigate('/PacientesOptions',{ state: { uid } });
       }
 
       const NavAddPacientes = () => {
-        navigate('/FormPacientes1');
+        navigate('/FormPacientes1',{ state: { uid } });
       }
       
     return (

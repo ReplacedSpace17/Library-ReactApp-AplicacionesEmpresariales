@@ -18,7 +18,7 @@ function PacientesAdd2() {
     const navigate = useNavigate(); // Get the navigation function
 
     const NavSiguiente = () => {
-        navigate('/FormPacientes3');
+        navigate('/FormPacientes3', { state: { pacienteData2 } });
       }
     
       const Back = () => {
@@ -30,21 +30,26 @@ function PacientesAdd2() {
       // Obtener los datos del paciente de props.location.state
       const pacienteData = location.state && location.state.pacienteData;
       const a = () => {
-        alert(pacienteData.nombre);
+        alert(pacienteData.Nombre);
       }
 
+      const [pacienteData2, setPacienteData] = useState({
+        UID: pacienteData.UID,
+        Nombre: pacienteData.Nombre,
+        ApellidoP: pacienteData.ApellidoP,
+        ApellidoM: pacienteData.ApellidoM,
+        Genero: pacienteData.Genero,
+        Direccion: pacienteData.Direccion,
+        telefono: pacienteData.telefono,
+        FechaIngreso: pacienteData.FechaIngreso,
+        FechaNacimiento: pacienteData.FechaNacimiento
 
-             // Estado para almacenar los datos del paciente
-    const [pacienteData2, setPacienteData] = useState({
-        nombre: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        telefono: '',
-        sexo: 'Masculino', // Valor predeterminado
-        direccion: '',
-        fecha: '',
-        ingreso: '',
     });
+
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setPacienteData({ ...pacienteData2, [name]: value });
+    }
 
 
     return (
@@ -60,11 +65,23 @@ function PacientesAdd2() {
                 <div className='containerForm'>
                     <form className='formPacientes'>
 
-                        <input className='inputForm' type='text' placeholder='Nivel educativo'/>
+                        <input className='inputForm' 
+                        type='text' placeholder='Nivel educativo'
+                        name='NivelEducativo'
+                        value={pacienteData.NivelEducativo}
+                        onChange={handleChange}/>
 
-                        <input className='inputForm' type='text' placeholder='Profesión'/>
+                        <input className='inputForm' type='text' 
+                        placeholder='Profesión'
+                        name='Profesion'
+                        value={pacienteData.Profesion}
+                        onChange={handleChange}/>
 
-                        <input className='inputForm' type='text' placeholder='Estado Civil'/>
+                        <input className='inputForm' type='text' 
+                        placeholder='Estado Civil'
+                        name='EstadoCivil'
+                        value={pacienteData.EstadoCivil}
+                        onChange={handleChange}/>
 
                         <input type='button' className='ButtonSecondary' onClick={a} value="Regresar"/>
                         <button className='ButtonPrimary' onClick={NavSiguiente}>Siguiente</button>

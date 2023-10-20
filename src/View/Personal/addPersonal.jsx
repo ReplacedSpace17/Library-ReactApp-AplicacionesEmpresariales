@@ -6,37 +6,44 @@ import '../styles/Login.css';
 import image from '../img/fondoPaciente.png';
 import logo from '../img/CognitiveX-logo.svg';
 import Header from '../../header';
-import './stylePacientes.css';
+
 import addIcon from '../../assets/icons/addIcon.png';
 import deleteIcon from '../../assets/icons/deleteIcon.png';
 import editIcon from '../../assets/icons/editIcon.png';
 import axios from 'axios';
-import { useNavigate , useLocation} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState } from 'react';
 import backendUrl from '../../configServer';
+import Swal from 'sweetalert2';
 
+function PersonalAdd() {
 
-function PacientesAdd1() {
-
-    const location = useLocation();
-    const { uid } = location.state;
     const navigate = useNavigate(); // Get the navigation function
 
-    const NavSiguiente = () => {
-        navigate('/FormPacientes2', { state: { pacienteData } });
+    const Home = () => {
+        navigate('/Home', { state: { personalData } });
       }
       const Back = () => {
         navigate(-1);
       }
 
        // Estado para almacenar los datos del paciente
-    const [pacienteData, setPacienteData] = useState({
-        UID: uid
+    const [personalData, setPersonal] = useState({
+        UID: "U00222",
+        PID: "P00022",
+        nombre: '',
+        apellidoPaterno: '',
+        apellidoMaterno: '',
+        telefono: '',
+        sexo: 'Masculino', // Valor predeterminado
+        direccion: '',
+        fecha: '',
+        ingreso: '',
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setPacienteData({ ...pacienteData, [name]: value });
+        setPersonal({ ...personalData, [name]: value });
     }
 
 
@@ -49,7 +56,7 @@ function PacientesAdd1() {
     // con la instancia 'paciente', por ejemplo, enviándola a tu servidor.
 
     // Ejemplo de cómo enviar la instancia al servidor usando axios
-    axios.post(backendUrl+'/api/paciente/add', pacienteData)
+    axios.post(backendUrl+'/api/usuarios/add', personalData)
       .then(response => {
         // Realizar acciones después de guardar exitosamente (por ejemplo, redireccionar).
         if (response.status === 201) {
@@ -58,7 +65,15 @@ function PacientesAdd1() {
             console.log('Guardado exitosamente');
             // Ejemplo de redirección a una página de éxito.
             // navigate('/exito');
-            navigate('/FormPacientes2', { state: { pacienteData } });
+            Swal.fire({
+                icon: 'success',
+                title: 'Agregado',
+                text: 'Se agregó correctamente',
+                confirmButtonColor: '#4CAF50',
+                confirmButtonText: 'Aceptar'
+              });
+            
+            Home();
           } else {
             // La solicitud no se completó con éxito, puedes manejar errores aquí.
             console.log('Error al guardar');
@@ -77,33 +92,54 @@ function PacientesAdd1() {
             </header>
             <body className='containerPacientesMenu'>
 
-                <h3 className='secondTittle'>Completa la información</h3>
-                <p>No dejes ningún campo en blanco </p>
+                <h3 className='secondTittle'>Agregar nuevo usuario</h3>
+                <p>No dejes ningún campo en blanco</p>
                 <div className='containerForm'>
-                <form className='formPacientes' >
+                <form className='formPacientes' onSubmit={handleSubmit}>
                     <input
                         className='inputForm'
+                        type='email'
+                        name='Email'
+                        placeholder='Correo electrónico'
+                        value={personalData.Nombre}
+                        onChange={handleChange}
+                        required
+                    />
+                    <input
+                        className='inputForm'
+                        type='password'
+                        name='Password'
+                        placeholder='Contraseña'
+                        value={personalData.Password}
+                        onChange={handleChange}
+                        required
+                    />
+                     <input
+                        className='inputForm'
                         type='text'
-                        name='Nombre'
+                        name='nombre'
                         placeholder='Nombre(s)'
-                        value={pacienteData.Nombre}
+                        value={personalData.Nombre}
                         onChange={handleChange}
+                        required
                     />
                     <input
                         className='inputForm'
                         type='text'
-                        name='ApellidoP'
+                        name='apellidoPaterno'
                         placeholder='Apellido Paterno'
-                        value={pacienteData.ApellidoP}
+                        value={personalData.ApellidoP}
                         onChange={handleChange}
+                        required
                     />
                     <input
                         className='inputForm'
                         type='text'
-                        name='ApellidoM'
+                        name='apellidoMaterno'
                         placeholder='Apellido Materno'
-                        value={pacienteData.ApellidoM}
+                        value={personalData.ApellidoM}
                         onChange={handleChange}
+                        required
                     />
                     <div className='contentInput'>
                         <input
@@ -111,14 +147,16 @@ function PacientesAdd1() {
                             type="number"
                             name='telefono'
                             placeholder='Telefono'
-                            value={pacienteData.telefono}
+                            value={personalData.Telefono}
                             onChange={handleChange}
+                            required
                         />
                         <select
                             className='inputSexo'
                             name='Genero'
-                            value={pacienteData.Genero}
+                            value={personalData.Genero}
                             onChange={handleChange}
+                            required
                         >
                             <option value="Masculino">Masculino</option>
                             <option value="Femenino">Femenino</option>
@@ -127,36 +165,22 @@ function PacientesAdd1() {
                     <input
                         className='inputForm'
                         type='text'
-                        name='Direccion'
-                        placeholder='Dirección'
-                        value={pacienteData.Direccion}
+                        name='Cargo'
+                        placeholder='Cargo'
+                        value={personalData.Cargo}
                         onChange={handleChange}
                     />
-                    <div className='contentInput'>
-                        <input
-                            className='inputTelefono'
-                            type='date'
-                            name='FechaIngreso'
-                            placeholder='Fecha'
-                            value={pacienteData.FechaIngreso}
-                            onChange={handleChange}
-                        />
-                        <input
-                            className='inputIngreso'
-                            type='date'
-                            name='FechaNacimiento'
-                            placeholder='Ingreso'
-                            value={pacienteData.FechaNacimiento}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <input
-                        type='button'
-                        className='ButtonSecondary'
-                        onClick={Back}
-                        value="Regresar"
+                     <input
+                        className='inputForm'
+                        type='text'
+                        name='especialidad'
+                        placeholder='Especialidad'
+                        value={personalData.Especialidad}
+                        onChange={handleChange}
                     />
-                    <button className='ButtonPrimary' onClick={NavSiguiente}>Siguiente</button>
+                    
+               
+                    <button className='ButtonPrimary' >Siguiente</button>
                 </form>
             </div>
             </body>
@@ -164,4 +188,4 @@ function PacientesAdd1() {
     );
 }
 
-export default PacientesAdd1;
+export default PersonalAdd;

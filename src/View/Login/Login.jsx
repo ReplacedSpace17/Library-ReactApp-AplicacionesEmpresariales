@@ -5,7 +5,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
-import { useNavigate } from "react-router-dom"; // Cambia a useNavigate
+import { useNavigate, useHistory} from "react-router-dom"; // Cambia a useNavigate
 import { useSpring, animated } from 'react-spring';
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import axios from 'axios';
@@ -71,24 +71,35 @@ axiosInstance.interceptors.response.use(
 );
 
   // Función para realizar la solicitud de autenticación
-const handleSubmit = async (event) => {
-  event.preventDefault();
-
-  try {
-    const response = await axiosInstance.post('/api/Login', {
-      Email: email,
-      Password: password,
-    });
-
-    if (response.status === 200) {
-      // El servidor ha respondido con un estado HTTP 200 (OK).
-      // Puedes hacer algo con la respuesta exitosa aquí.
-      navigate('/Home');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    try {
+      const response = await axiosInstance.post('/api/Login', {
+        Email: email,
+        Password: password,
+      });
+  
+      if (response.status === 200) {
+        // El servidor ha respondido con un estado HTTP 200 (OK).
+        // Puedes hacer algo con la respuesta exitosa aquí.
+        
+        // Accede al campo 'uid' en la respuesta JSON.
+        const uid = response.data.datos.uid;
+        navigate('/Home',{ state: { uid } });
+        // Haz algo con 'uid', como mostrarlo en la consola.
+        
+  
+        // Luego, puedes navegar a '/Home'.
+       
+      } else {
+        console.error('Respuesta no válida del servidor:', response);
+      }
+    } catch (error) {
+      console.error('Error en la solicitud de autenticación:', error);
     }
-  } catch (error) {
-    console.error('Error en la solicitud de autenticación:', error);
-  }
-};
+  };
+  
 
   return (
     <div id='body'>
