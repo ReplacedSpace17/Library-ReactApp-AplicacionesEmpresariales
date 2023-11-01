@@ -6,8 +6,9 @@ import '../styles/Login.css';
 import image from '../img/fondoPaciente.png';
 import logo from '../img/CognitiveX-logo.svg';
 import Header from '../../header';
-import './stylePacientes.css';
+
 import addIcon from '../../assets/icons/addIcon.png';
+import viewIcon from '../../assets/icons/ojo.png';
 import deleteIcon from '../../assets/icons/deleteIcon.png';
 import editIcon from '../../assets/icons/editIcon.png';
 
@@ -17,13 +18,14 @@ import axios from 'axios'; // Asegúrate de importar axios o la biblioteca que e
 // Otras importaciones...
 import backendUrl from '../../configServer';
 import Swal from 'sweetalert2';
+import { useLocation } from "react-router-dom";
 
-function PacientesOptions() {
+function PersonalDashboard() {
   const navigate = useNavigate();
   const [pacientes, setPacientes] = useState([]);
 
 
-  const deletePaciente = (id) => {
+  const deleteUsuario = (id) => {
 
     Swal.fire({
       title: '¿Seguro que quieres eliminarlo?',
@@ -37,7 +39,7 @@ function PacientesOptions() {
       }
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(backendUrl + '/api/paciente/delete/' + id)
+        axios.delete(backendUrl + '/api/usuarios/delete/' + id)
           .then(response => {
             if (response.status === 200) {
               Swal.fire('Eliminado!', '', 'success');
@@ -56,10 +58,46 @@ function PacientesOptions() {
     
   }
   
+  const viewPersonal = (paciente) => {
+    var Nombre = paciente.nombre;
+
+    Swal.fire({
+        title: 'Información del usuario' ,
+        icon: 'info',
+        html:
+          '<b>Nombre: </b> ' +  paciente.nombre + '<br>' +
+          '<b>Apellido Paterno: </b> ' +  paciente.apellidop + '<br>' +
+          '<b>Apellido Materno: </b> ' +  paciente.apellidom + '<br>' +
+          '<b>Email: </b> ' +   paciente.email + '<br>' +
+          '<b>Password:  </b> '   + paciente.password + '<br>' +
+          '<b>Telefono:  </b> '   + paciente.telefono + '<br>' +
+          '<b>Genero:  </b> ' +  paciente.genero + '<br>' +
+          '<b>Cargo:  </b> ' +  paciente.cargo + '<br>' +
+          '<b>Especialidad: </b> '+ paciente.especialidad + '<br>',
+        
+        showCloseButton: true,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Aceptar!',
+        confirmButtonAriaLabel: 'Thumbs up, great!',
+        cancelButtonText:
+          '<i class="fa fa-thumbs-down"></i>',
+        cancelButtonAriaLabel: 'Thumbs down'
+      })
+  }
+
+  const goToEdit = (data) => {
+
+   
+    navigate('/ModifyPersonal', { state: { data } });
+  }
+
+ 
 
   useEffect(() => {
     // Realiza una solicitud al servidor para obtener los datos de pacientes
-    axios.get(backendUrl+'/api/pacientes') // Ajusta la URL de la API según tu configuración
+    axios.get(backendUrl+'/api/usuarios/all') // Ajusta la URL de la API según tu configuración
       .then(response => {
         setPacientes(response.data);
       })
@@ -76,7 +114,7 @@ function PacientesOptions() {
     </header>
     <body className='containerPacientesMenu'>
 
-      <h3 className='secondTittle'>Welcome</h3>
+      <h3 className='secondTittle'>Welcome Usuarios</h3>
 
       <div className='TablecontainerPacientes'>
         <table class="pacientes-table">
@@ -85,20 +123,22 @@ function PacientesOptions() {
               <th>Nombre</th>
               <th>Apellido Paterno</th>
               <th>Apellido Materno</th>
-              <th>FechaNacimeinto</th>
+              <th>Email</th>
+              <th>View</th>
               <th>Edit</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
         {pacientes.map(paciente => (
-          <tr key={paciente.pid}>
+          <tr key={paciente.uid}>
             <td>{paciente.nombre}</td>
             <td>{paciente.apellidop}</td>
             <td>{paciente.apellidom}</td>
-            <td>{paciente.fechaingreso}</td>
-            <td className='iconTable'><img src={editIcon} className='iconIMG'/></td>
-            <td className='iconTable'  onClick={() => deletePaciente(paciente.pid)}><img src={deleteIcon} className='iconIMG'/></td>
+            <td>{paciente.email}</td>
+            <td className='iconTable'  onClick={() => viewPersonal(paciente)}><img src={viewIcon} className='iconIMG'/></td>
+            <td className='iconTable'  onClick={() => goToEdit(paciente)}><img src={editIcon} className='iconIMG'/></td>
+            <td className='iconTable'  onClick={() => deleteUsuario(paciente.uid)}><img src={deleteIcon} className='iconIMG'/></td>
           </tr>
         ))}
       </tbody>
@@ -113,4 +153,4 @@ function PacientesOptions() {
   );
 }
 
-export default PacientesOptions;
+export default PersonalDashboard;

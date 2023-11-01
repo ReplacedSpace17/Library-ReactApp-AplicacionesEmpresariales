@@ -19,6 +19,9 @@ function Header({uid}) {
   const goToHome= () => {
     navigate('/Home'); // Use navigate to go to the '/Pacientes' route
   }
+  const goToUsuarios= () => {
+    navigate('/UsuariosMenu'); // Use navigate to go to the '/Pacientes' route
+  }
 
   
   return (
@@ -30,7 +33,7 @@ function Header({uid}) {
         <ul>
           <li onClick={goToHome}>Home</li>
           <li onClick={goToPacientes}>Pacientes</li>
-          <li onClick={goToPersonalAdd}>Personal</li>
+          <li onClick={goToUsuarios}>Personal</li>
           <li>Expedientes</li>
           <li>Estadísticas</li>
           <li>Actividades</li>

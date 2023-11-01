@@ -6,16 +6,20 @@ import Header from '../../header';
 import montain from '../img/loginImage.png';
 import fondo from '../img/Home.png';
 import { useLocation } from 'react-router-dom';
-
+import fondo2 from '../../assets/fondoHome.png';
 function Home() {
-    const location = useLocation();
-    const { uid } = location.state;
+   
   
     return (
         <div className="ContentHome">
-            <Header uid={uid} />
-          <h1>{uid}</h1>
+        <Header />
+        <div className="contentIMGFondo">
+        <h1 className='TitleHome'>Welcome</h1>
+        <h1 className='SubTitleHome'>Home</h1>
+          
         </div>
+      </div>
+      
     );
 }
 

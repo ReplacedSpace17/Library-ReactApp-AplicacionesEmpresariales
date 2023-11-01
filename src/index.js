@@ -14,6 +14,9 @@ import PacientesAdd1 from './View/Pacientes/PacientesAdd1';
 import PacientesAdd2 from './View/Pacientes/PacientesAdd2';
 import PacientesAdd3 from './View/Pacientes/PacientesAdd3';
 import PersonalAdd from './View/Personal/addPersonal';
+import PersonalMenu from './View/Personal/PersonalMenu';
+import PersonalDashboard from './View/Personal/PersonalDashboard';
+import ModifyPersonal from './View/Personal/ModifyPersonal';
 
 const router = createBrowserRouter([
   {
@@ -54,7 +57,18 @@ const router = createBrowserRouter([
     path: "/PersonalAdd",
     element:  <PersonalAdd/>,
   },
-
+  {
+    path: "/UsuariosMenu",
+    element:  <PersonalMenu/>,
+  },
+  {
+    path: "/PersonalDashboard",
+    element:  <PersonalDashboard/>,
+  },
+  {
+    path: "/ModifyPersonal",
+    element:  <ModifyPersonal/>,
+  },
   
 ]);
 

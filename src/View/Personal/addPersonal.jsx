@@ -21,7 +21,7 @@ function PersonalAdd() {
     const navigate = useNavigate(); // Get the navigation function
 
     const Home = () => {
-        navigate('/Home', { state: { personalData } });
+        navigate('/UsuariosMenu', { state: { personalData } });
       }
       const Back = () => {
         navigate(-1);
@@ -101,7 +101,7 @@ function PersonalAdd() {
                         type='email'
                         name='Email'
                         placeholder='Correo electrónico'
-                        value={personalData.Nombre}
+                        value={personalData.Email}
                         onChange={handleChange}
                         required
                     />
@@ -117,7 +117,7 @@ function PersonalAdd() {
                      <input
                         className='inputForm'
                         type='text'
-                        name='nombre'
+                        name='Nombre'
                         placeholder='Nombre(s)'
                         value={personalData.Nombre}
                         onChange={handleChange}
@@ -126,7 +126,7 @@ function PersonalAdd() {
                     <input
                         className='inputForm'
                         type='text'
-                        name='apellidoPaterno'
+                        name='ApellidoP'
                         placeholder='Apellido Paterno'
                         value={personalData.ApellidoP}
                         onChange={handleChange}
@@ -135,7 +135,7 @@ function PersonalAdd() {
                     <input
                         className='inputForm'
                         type='text'
-                        name='apellidoMaterno'
+                        name='ApellidoM'
                         placeholder='Apellido Materno'
                         value={personalData.ApellidoM}
                         onChange={handleChange}
@@ -145,7 +145,7 @@ function PersonalAdd() {
                         <input
                             className='inputTelefono'
                             type="number"
-                            name='telefono'
+                            name='Telefono'
                             placeholder='Telefono'
                             value={personalData.Telefono}
                             onChange={handleChange}
@@ -173,7 +173,7 @@ function PersonalAdd() {
                      <input
                         className='inputForm'
                         type='text'
-                        name='especialidad'
+                        name='Especialidad'
                         placeholder='Especialidad'
                         value={personalData.Especialidad}
                         onChange={handleChange}
