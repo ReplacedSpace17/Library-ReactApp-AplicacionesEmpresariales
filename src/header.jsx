@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css'; // Importa un archivo CSS para estilizar el menú
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-
+import ActividadDashboard from './View/Actividades/actividadesDashboard';
 import logo from './assets/CognitiveX-logo.png'
 function Header({uid}) {
 
@@ -22,8 +22,10 @@ function Header({uid}) {
   const goToUsuarios= () => {
     navigate('/UsuariosMenu'); // Use navigate to go to the '/Pacientes' route
   }
+  const goToActivity= () => {
+    navigate('/ActividadDashboard'); // Use navigate to go to the '/Pacientes' route
+  }
 
-  
   return (
     <header className="header">
       <div className="logo">
@@ -36,7 +38,7 @@ function Header({uid}) {
           <li onClick={goToUsuarios}>Personal</li>
           <li>Expedientes</li>
           <li>Estadísticas</li>
-          <li>Actividades</li>
+          <li onClick={goToActivity}>Actividades</li>
           
         </ul>
       </nav>

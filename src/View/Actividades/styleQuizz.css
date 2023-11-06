@@ -1,0 +1,40 @@
+/* Estilos para el contenedor del quiz */
+.quiz-container {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Estilos para el header */
+  .quiz-header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .quiz-header h1 {
+    font-size: 24px;
+  }
+  
+  /* Estilos para la imagen de la pregunta */
+  .question-image {
+    max-width: 250px;
+    max-height: 250px;
+    margin: 20px 0;
+    border: #333 10px solid;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para las imágenes de las opciones */
+  .option-image {
+    max-width: 250px;
+    max-height: 250px;
+    margin: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .option-image:hover{
+    scale: 1.1;
+    background-color: rgb(110, 110, 110);
+  }
+  

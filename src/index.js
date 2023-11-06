@@ -17,6 +17,7 @@ import PersonalAdd from './View/Personal/addPersonal';
 import PersonalMenu from './View/Personal/PersonalMenu';
 import PersonalDashboard from './View/Personal/PersonalDashboard';
 import ModifyPersonal from './View/Personal/ModifyPersonal';
+import ActividadDashboard from './View/Actividades/actividadesDashboard';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,11 @@ const router = createBrowserRouter([
   {
     path: "/ModifyPersonal",
     element:  <ModifyPersonal/>,
+  },
+
+  {
+    path: "/ActividadDashboard",
+    element:  <ActividadDashboard/>,
   },
   
 ]);
