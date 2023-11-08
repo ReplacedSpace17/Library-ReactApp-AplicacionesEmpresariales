@@ -99,6 +99,8 @@ const QuizApp = ({ questions }) => {
     }
   }, []);
 
+
+  
   return (
     <div className="quiz-container">
       <header className="quiz-header">

@@ -3,6 +3,8 @@ import './Header.css'; // Importa un archivo CSS para estilizar el menú
 import { useNavigate } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 import ActividadDashboard from './View/Actividades/actividadesDashboard';
+import ActivityMenu from './View/Actividades/ActivityMenu';
+
 import logo from './assets/CognitiveX-logo.png'
 function Header({uid}) {
 
@@ -23,7 +25,7 @@ function Header({uid}) {
     navigate('/UsuariosMenu'); // Use navigate to go to the '/Pacientes' route
   }
   const goToActivity= () => {
-    navigate('/ActividadDashboard'); // Use navigate to go to the '/Pacientes' route
+    navigate('/ActivityMenu'); // Use navigate to go to the '/Pacientes' route
   }
 
   return (

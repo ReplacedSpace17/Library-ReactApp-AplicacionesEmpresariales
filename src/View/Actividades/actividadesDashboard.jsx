@@ -3,7 +3,11 @@ import QuizApp from './QuizApp'; // Ajusta la ruta a tu archivo QuizApp
 import questions from './imgs/questions.json'; // Ajusta la ruta a tu archivo JSON de preguntas
 
 
-function ActividadDashboard() {
+function ActividadPanel() {
+
+  //funcion para obtener el instruccion y crear instancia dle json nuevo 
+
+  
     // Función para cargar dinámicamente las imágenes
     const loadImage = (imageName) => {
       try {
@@ -24,10 +28,10 @@ function ActividadDashboard() {
   
     return (
       <div className="App">
-        <h1>Juegos</h1>
+
         <QuizApp questions={questionsWithImages} />
       </div>
     );
   }
 
-export default ActividadDashboard;
+export default ActividadPanel;
